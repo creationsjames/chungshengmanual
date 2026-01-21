@@ -1,0 +1,714 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>春生操作手冊</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2ee96da6-13d8-804f-9dab-fffd235bb00c" class="page sans"><header><h1 class="page-title" dir="auto">春生操作手冊</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h1 id="2ee96da6-13d8-8056-8b6f-ef394171e234" class="">LINE@管理後台</h1></div><div style="display:contents" dir="auto"><ul id="2ee96da6-13d8-8085-899e-f974863276d9" class="bulleted-list"><li style="list-style-type:disc">登入畫面<br/>本次提供三組帳號密碼使用，帳號密碼不分權限。<div style="display:contents" dir="ltr"><figure id="2ee96da6-13d8-80c6-ba60-c4db67eda271" class="image"><a href="image.png"><img style="width:384px" src="image.png"/></a></figure></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ee96da6-13d8-801b-915e-fba4322daa24" class="bulleted-list"><li style="list-style-type:disc">首頁<br/>供檢視有幾筆LINE@已綁定或未綁定</li></ul></div><div style="display:contents" dir="ltr"><figure id="2ee96da6-13d8-808a-9056-f28b73fc9a8c" class="image"><a href="image%201.png"><img style="width:576px" src="image%201.png"/></a></figure></div><div style="display:contents" dir="auto"><ul id="2ee96da6-13d8-80ec-964c-ec693d8118a5" class="bulleted-list"><li style="list-style-type:disc">由左側功能列表選取功能<div style="display:contents" dir="auto"><ul id="2ee96da6-13d8-8058-a48a-c30be5b96af7" class="bulleted-list"><li style="list-style-type:circle">管理LINE綁定：只要LINE使用者加入官方LINE@並點選個人化服務填寫資料送出後，即可於此處綁定、管理與刪除所有未/已綁定資料。<div style="display:contents" dir="ltr"><figure id="2ef96da6-13d8-80c6-a513-e61cac4f3358" class="image"><a href="image%202.png"><img style="width:2876px" src="image%202.png"/></a></figure></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-80f9-a45c-e505f7f24a5b" class="bulleted-list"><li style="list-style-type:square">刪除<br/>若要刪除該綁定資料請點選刪除後，該使用者LINE@前台的圖文選單將立即轉為未綁定圖文選單。</li></ul></div><div style="display:contents" dir="auto"><ul id="2ee96da6-13d8-8042-b207-c232d538f424" class="bulleted-list"><li style="list-style-type:square">綁定：<div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-80ea-907c-d2406d83f3dd" class="bulleted-list"><li style="list-style-type:disc">綁定方式有兩種：<div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-8039-bef7-e37a5a4d3618" class="bulleted-list"><li style="list-style-type:circle">自動綁定：當LINE使用者點選個人化服務並填寫姓名、身分證字號、生日，三者資料與門市藥局管理系統客戶基本資料(SA210客戶基本資料)相同者，將自動以SA210對應的客戶代號綁定。</li></ul></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-80dc-9937-f986b0356094" class="bulleted-list"><li style="list-style-type:circle">人工綁定：當LINE使用者點選個人化服務並填寫姓名、身分證字號、生日，三者資料與門市藥局管理系統客戶基本資料(SA210客戶基本資料)其一不符者，將於後台顯示LINE使用者狀態為未綁定。<div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-8015-b539-f69515fd00fc" class="bulleted-list"><li style="list-style-type:square">人工綁定方式：選取綁定狀態為「未綁定」之LINE使用者，點選「綁定」，輸入要綁定的客戶代號(SA210客戶基本資料)。<div style="display:contents" dir="ltr"><figure id="2ef96da6-13d8-80cf-b3c8-d6904b1453b0" class="image"><a href="image%203.png"><img style="width:2878px" src="image%203.png"/></a></figure></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-80d3-9033-df163440f56e" class="bulleted-list"><li style="list-style-type:square">若顯示綁定失敗代表輸入的客戶代號不存在SA210客戶基本資料，請檢查SA210客戶基本資料是否無誤。<div style="display:contents" dir="ltr"><figure id="2ef96da6-13d8-8055-9948-e631450ddd9f" class="image"><a href="image%204.png"><img style="width:570px" src="image%204.png"/></a></figure></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-80e2-af7a-e95276957e75" class="bulleted-list"><li style="list-style-type:square">若顯示此客代已綁定，請以該客代搜尋出已綁定資料確認。<div style="display:contents" dir="ltr"><figure id="2ef96da6-13d8-80bf-b198-cfcc1c34febb" class="image"><a href="image%205.png"><img style="width:570px" src="image%205.png"/></a></figure></div><div style="display:contents" dir="ltr"><figure id="2ef96da6-13d8-8077-8728-ed6842c85334" class="image"><a href="image%206.png"><img style="width:2294px" src="image%206.png"/></a></figure></div></li></ul></div></li></ul></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-8080-8859-e6e5009ffd97" class="bulleted-list"><li style="list-style-type:square">管理：設定領藥人(即主要客代)與用藥人(即附加客代)資訊，用藥人的處方紀錄、領藥通知將會發送至領藥人的LINE；一個主要客代最多可綁定5位附加客代。<div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-80b8-b548-f1c7edf005b9" class="bulleted-list"><li style="list-style-type:disc">找到接收領藥通知的客戶代號並點選「管理」，於顧客代號欄位輸入用藥人客戶代號後點選「保存」，確認姓名為用藥人即綁定成功；點選「刪除」即解除綁定該用藥人的處方領藥通知至主要客代<div style="display:contents" dir="ltr"><figure id="2ef96da6-13d8-806b-adf9-c1ffca60cf0b" class="image"><a href="image%207.png"><img style="width:709.982666015625px" src="image%207.png"/></a></figure></div></li></ul></div></li></ul></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-8016-9d2f-e0a9d87c267e" class="bulleted-list"><li style="list-style-type:disc">管理領藥通知<br/>只要在藥局管理系統-DR250調劑作業等打的處方，於調劑日期當天將會發送LINE領藥通知給該處方客戶主要綁定客代的LINE使用者。<div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-8095-acbf-ed6159320b3c" class="bulleted-list"><li style="list-style-type:circle">設定發送領藥通知頻率：<br/>發送領藥通知時間設定後須5~10分鐘同步與生效時間，建議時間設定晚於當下時間至少10分鐘。<div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-80d3-8939-e7eae945d2fc" class="bulleted-list"><li style="list-style-type:square">領藥通知日子次數<br/>要通知幾天</li></ul></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-8076-bd4a-f69304ec629f" class="bulleted-list"><li style="list-style-type:square">第N次通知日期<br/>以調劑日期起計算第幾天</li></ul></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-80e6-aba3-e27fb27ac28d" class="bulleted-list"><li style="list-style-type:square">每日領藥通知次數<br/>每日發送領藥通知次數</li></ul></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-8058-8b2d-e3a14e538e83" class="bulleted-list"><li style="list-style-type:square">第N次通知時間<br/>每日每次發送領藥通知時間點</li></ul></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-8083-bf12-cc5501d13f4f" class="bulleted-list"><li style="list-style-type:disc">處方領藥不通知<br/>針對可能缺藥或其他因素而該筆處方不需要通知領藥，至DR250 - 調劑作業找出該筆處方勾選「不通知」即可。<div style="display:contents" dir="ltr"><figure id="2ef96da6-13d8-8040-811f-cbace4ab7efe" class="image"><a href="image%208.png"><img style="width:709.9375px" src="image%208.png"/></a></figure></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-8014-988f-cfa5be1c4fcc" class="bulleted-list"><li style="list-style-type:disc">圖文選單<br/>本圖文選單功能與LINE@官方帳號圖文選單相同，僅針對串接藥局系統功能說明<div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-8014-99de-d8fda5206582" class="bulleted-list"><li style="list-style-type:circle">圖文選單修改<br/>使用中與已預約的圖文選單只能修改選單的使用起訖時間</li></ul></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-8069-8acc-f61a710d8f52" class="bulleted-list"><li style="list-style-type:circle">圖文選單動作 - 特殊功能<br/>當選單動作選擇特殊功能時，將可選擇相對應功能<div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-80f2-8690-f5477e14f0a6" class="bulleted-list"><li style="list-style-type:square">查詢領藥紀錄：查詢主要綁定客代、附加客代於藥局管理系統-DR250調劑作業登打的處方紀錄<div style="display:contents" dir="ltr"><figure id="2ef96da6-13d8-806f-b08b-dafdeb9f43b9" class="image"><a href="S__25157641.jpg"><img style="width:336px" src="S__25157641.jpg"/></a></figure></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-80fb-bf91-fe0d5a797256" class="bulleted-list"><li style="list-style-type:square">查詢點數：查詢主要綁定客代會員點數<div style="display:contents" dir="ltr"><figure id="2ef96da6-13d8-80c6-afc4-ede329f9312e" class="image"><a href="image%209.png"><img style="width:336px" src="image%209.png"/></a></figure></div></li></ul></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-80a4-a3de-d623a14be19a" class="bulleted-list"><li style="list-style-type:disc">受眾<div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-80a9-a58e-e94102c61213" class="bulleted-list"><li style="list-style-type:circle">由LINE管理後台產生受眾<br/>此功能將以各條件抓取門市銷售資料，進而篩選出符合條件的客戶，只有綁定成功LINE的客戶才會列入受眾名單，點選「儲存」10分鐘後至LINE@官方帳號頁面查看受眾是否成功產生，將可以該受眾群發訊息。<div style="display:contents" dir="ltr"><figure id="2ef96da6-13d8-807f-91bd-e93530945d16" class="image"><a href="image%2010.png"><img style="width:681.9783325195312px" src="image%2010.png"/></a></figure></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-805c-9189-f5bb3658e7d5" class="bulleted-list"><li style="list-style-type:circle">由藥局管理系統 - 簡訊助理產生受眾<br/>延伸簡訊助理功能，依不同條件找出客戶後，點選「產生LINE@」名單將已綁定LINE的客戶匯出成LINE@官方帳號使用的受眾文字檔，再至LINE@官方帳號 - 受眾 匯入該文字檔產生受眾。<div style="display:contents" dir="ltr"><figure id="2ef96da6-13d8-8049-b7da-d5fda99cc32b" class="image"><a href="image%2011.png"><img style="width:709.982666015625px" src="image%2011.png"/></a></figure></div><div style="display:contents" dir="ltr"><figure id="2ef96da6-13d8-8064-b94a-e5368df30e6b" class="image"><a href="image%2012.png"><img style="width:2457px" src="image%2012.png"/></a></figure></div><div style="display:contents" dir="ltr"><figure id="2ef96da6-13d8-8004-a760-cb0a06d7b1f3" class="image"><a href="image%2013.png"><img style="width:2299px" src="image%2013.png"/></a></figure></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><hr id="2ef96da6-13d8-807c-9591-e6d4b41a2016"/></div><div style="display:contents" dir="auto"><hr id="2ef96da6-13d8-80b3-9e09-e8710c50af98"/></div><div style="display:contents" dir="auto"><h1 id="2ef96da6-13d8-80b5-882c-fd33d88478d7" class="">LINE@前台</h1></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-8010-80b3-eb1963b5195b" class="bulleted-list"><li style="list-style-type:disc">綁定步驟<div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-800f-bb29-f61e0f8351c2" class="bulleted-list"><li style="list-style-type:circle">LINE使用者加入官方LINE@，點擊選單綁定個人化服務<div style="display:contents" dir="ltr"><figure id="2ee96da6-13d8-800b-9b5d-e4c645002a7c" class="image"><a href="image%2014.png"><img style="width:240px" src="image%2014.png"/></a></figure></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ee96da6-13d8-801c-b73a-daaf3839cd5f" class="bulleted-list"><li style="list-style-type:circle">填寫姓名、身分證字號、出生年月日。<div style="display:contents" dir="ltr"><figure id="2ef96da6-13d8-80fc-ba8b-c6f17131eed9" class="image"><a href="S__25157644_0.jpg"><img style="width:336px" src="S__25157644_0.jpg"/></a></figure></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-80a5-bed4-c90482dfc6af" class="bulleted-list"><li style="list-style-type:circle">三項資料與藥局系統相同即自動綁定。<div style="display:contents" dir="ltr"><figure id="2ef96da6-13d8-800d-b172-de42ce4d376e" class="image"><a href="S__25157647_0.jpg"><img style="width:336px" src="S__25157647_0.jpg"/></a></figure></div></li></ul></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-8021-83f1-d0224aceeb93" class="bulleted-list"><li style="list-style-type:disc">三項資料若有一項不同則無法自動綁定，須請用戶至門市人工綁定。<div style="display:contents" dir="ltr"><figure id="2ef96da6-13d8-80de-86d7-fb5848a32456" class="image"><a href="S__25157646_0.jpg"><img style="width:240px" src="S__25157646_0.jpg"/></a></figure></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-80f5-bd78-d2d133cf6223" class="bulleted-list"><li style="list-style-type:disc">若填寫的資料已經被綁定過，請用戶檢查填寫的資料是否正確或由門市人員確認。<div style="display:contents" dir="ltr"><figure id="2ef96da6-13d8-8026-b405-f6067a72aa7e" class="image"><a href="S__25157645_0.jpg"><img style="width:240px" src="S__25157645_0.jpg"/></a></figure></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-808a-b330-c86f48883e5d" class="bulleted-list"><li style="list-style-type:disc">前台綁定成功畫面會顯示圖文選單<div style="display:contents" dir="ltr"><figure id="2ef96da6-13d8-8057-847d-f0a8437501ff" class="image"><a href="S__25157648_0.jpg"><img style="width:336px" src="S__25157648_0.jpg"/></a></figure></div></li></ul></div><div style="display:contents" dir="auto"><ul id="2ef96da6-13d8-804b-8b40-ff44db44e6e3" class="bulleted-list"><li style="list-style-type:disc">前台未綁定或未綁定成功畫面<div style="display:contents" dir="ltr"><figure id="2ef96da6-13d8-80b8-8bba-c0cba365ca0e" class="image"><a href="S__25157649.jpg"><img style="width:336px" src="S__25157649.jpg"/></a></figure></div></li></ul></div><div style="display:contents" dir="auto"><p id="2ef96da6-13d8-803e-bf37-cca400b183c2" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
