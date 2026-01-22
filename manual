@@ -1,0 +1,313 @@
+import React, { useState, useEffect } from 'react';
+import { Menu, X, ChevronRight, CheckCircle, AlertTriangle, BookOpen, Users, Bell, Settings, Search, Info } from 'lucide-react';
+
+// --- 創盛國際品牌色 ---
+const colors = {
+  primary: '#0056b3', // 創盛藍
+  secondary: '#17a2b8', // 科技青
+  dark: '#343a40',
+  light: '#f8f9fa',
+  white: '#ffffff',
+  text: '#333333',
+  gray: '#6c757d',
+  accent: '#e67e22' // 橘色重點
+};
+
+// --- 手冊內容資料結構 ---
+const manualData = [
+  {
+    id: 'intro',
+    title: '系統簡介',
+    icon: <Info size={20} />,
+    content: (
+      <div className="space-y-6">
+        <div className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white p-8 rounded-xl shadow-lg mb-8">
+          <h1 className="text-3xl font-bold mb-4">Mr.P 藥局管理系統</h1>
+          <h2 className="text-xl opacity-90">LINE@ 官方帳號串接功能操作手冊</h2>
+          <div className="mt-6 pt-6 border-t border-white/20 flex flex-col md:flex-row justify-between text-sm opacity-80">
+            <span>開發廠商：創盛國際資訊科技有限公司</span>
+            <span>手冊製作：James Peng</span>
+            <span>版本：V1.0</span>
+          </div>
+        </div>
+        <p className="text-lg leading-relaxed text-gray-700">
+          歡迎使用 Mr.P 藥局管理系統的 LINE@ 串接模組。本手冊將引導您完成從後台設定到前台會員綁定的完整流程，讓您的藥局能透過 LINE 官方帳號提供更優質的會員服務，包含領藥通知、紀錄查詢與點數管理。
+        </p>
+      </div>
+    )
+  },
+  {
+    id: 'backend',
+    title: '管理後台操作',
+    icon: <Settings size={20} />,
+    subItems: [
+      { id: 'login', title: '1.1 系統登入' },
+      { id: 'dashboard', title: '1.2 系統首頁' },
+      { id: 'binding', title: '1.3 LINE 綁定管理' },
+      { id: 'notification', title: '1.4 領藥通知管理' },
+      { id: 'features', title: '1.5 特殊功能設定' },
+      { id: 'audience', title: '1.6 受眾名單管理' }
+    ],
+    content: (
+      <div className="space-y-12">
+        <section id="login" className="scroll-mt-24">
+          <h3 className="text-2xl font-bold text-gray-800 border-l-4 border-blue-600 pl-4 mb-6">1.1 系統登入</h3>
+          <p className="mb-4">請使用系統配發之管理員帳號密碼進行登入。目前提供之三組帳號權限皆相同，均可執行完整管理功能。</p>
+          <div className="bg-gray-100 p-4 rounded-lg border border-gray-200">
+            {/* 圖片預留位：登入畫面 */}
+             <div className="aspect-video bg-gray-200 flex items-center justify-center text-gray-500 rounded font-bold">
+               [圖片: image.png - 登入畫面]
+             </div>
+             <p className="text-center text-sm text-gray-500 mt-2">系統登入介面</p>
+          </div>
+        </section>
+
+        <section id="dashboard" className="scroll-mt-24">
+          <h3 className="text-2xl font-bold text-gray-800 border-l-4 border-blue-600 pl-4 mb-6">1.2 系統首頁</h3>
+          <p className="mb-4">登入後即可看見系統儀表板，此處提供 <strong>LINE@ 綁定狀態</strong> 的即時統計概覽。</p>
+           <div className="bg-gray-100 p-4 rounded-lg border border-gray-200">
+             <div className="aspect-video bg-gray-200 flex items-center justify-center text-gray-500 rounded font-bold">
+               [圖片: image 1.png - 儀表板]
+             </div>
+          </div>
+        </section>
+
+        <section id="binding" className="scroll-mt-24">
+          <h3 className="text-2xl font-bold text-gray-800 border-l-4 border-blue-600 pl-4 mb-6">1.3 LINE 綁定管理</h3>
+          <p className="mb-4">此功能位於左側選單的「管理 LINE 綁定」。當用戶於 LINE 官方帳號填寫資料後，管理員可在此進行審核。</p>
+          
+          <div className="grid md:grid-cols-2 gap-6 mt-6">
+            <div className="bg-white p-6 rounded-xl shadow-md border border-blue-100">
+              <h4 className="text-lg font-bold text-blue-700 mb-3 flex items-center"><CheckCircle size={18} className="mr-2"/> 自動綁定</h4>
+              <p className="text-sm text-gray-600">當用戶輸入的「姓名、身分證字號、生日」與系統資料完全相符時，系統將自動完成綁定，無需人工介入。</p>
+            </div>
+            <div className="bg-white p-6 rounded-xl shadow-md border border-cyan-100">
+              <h4 className="text-lg font-bold text-cyan-700 mb-3 flex items-center"><Settings size={18} className="mr-2"/> 人工綁定</h4>
+              <p className="text-sm text-gray-600">若資料有誤，狀態顯示「未綁定」。請點選「綁定」，輸入該客戶在藥局系統的「客戶代號」即可連結。</p>
+            </div>
+          </div>
+
+          <div className="mt-6 bg-orange-50 border-l-4 border-orange-400 p-4">
+            <div className="flex items-start">
+              <AlertTriangle className="text-orange-500 mr-3 mt-1" size={20} />
+              <div>
+                <h5 className="font-bold text-orange-800">常見錯誤排除</h5>
+                <ul className="list-disc pl-5 mt-2 text-sm text-orange-700 space-y-1">
+                  <li><strong>綁定失敗：</strong>通常是客戶代號輸入錯誤，請再次確認 SA210 資料。</li>
+                  <li><strong>重複綁定：</strong>若顯示此客代已綁定，請先搜尋該代號，確認是否已被其他 LINE 帳號佔用。</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="notification" className="scroll-mt-24">
+           <h3 className="text-2xl font-bold text-gray-800 border-l-4 border-blue-600 pl-4 mb-6">1.4 領藥通知管理</h3>
+           <p className="mb-4">系統依據 DR250 調劑作業資料自動發送。建議設定時間應晚於當下 10 分鐘以上，以免錯過排程。</p>
+           <div className="bg-gray-100 p-4 rounded-lg border border-gray-200">
+             <div className="aspect-video bg-gray-200 flex items-center justify-center text-gray-500 rounded font-bold">
+               [圖片: image 8.png - 通知設定]
+             </div>
+          </div>
+        </section>
+      </div>
+    )
+  },
+  {
+    id: 'frontend',
+    title: '用戶端操作指南',
+    icon: <Users size={20} />,
+    subItems: [
+      { id: 'binding-flow', title: '2.1 綁定流程' },
+      { id: 'status', title: '2.2 狀態說明' }
+    ],
+    content: (
+      <div className="space-y-12">
+        <section id="binding-flow" className="scroll-mt-24">
+          <h3 className="text-2xl font-bold text-gray-800 border-l-4 border-cyan-600 pl-4 mb-6">2.1 會員綁定流程</h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { step: 1, title: '點選綁定', img: 'image 14.png' },
+              { step: 2, title: '輸入資料', img: 'S__25157644_0.jpg' },
+              { step: 3, title: '確認送出', img: 'S__25157647_0.jpg' },
+              { step: 4, title: '綁定成功', img: 'S__25157648_0.jpg' }
+            ].map((item) => (
+              <div key={item.step} className="flex flex-col items-center">
+                <div className="w-full aspect-[9/16] bg-gray-200 rounded-lg mb-3 flex items-center justify-center text-xs text-gray-500 font-bold border-2 border-white shadow-sm">
+                  [手機截圖: {item.img}]
+                </div>
+                <div className="w-6 h-6 rounded-full bg-cyan-600 text-white flex items-center justify-center text-xs font-bold mb-1">{item.step}</div>
+                <span className="text-sm font-bold text-gray-700">{item.title}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="status" className="scroll-mt-24">
+          <h3 className="text-2xl font-bold text-gray-800 border-l-4 border-cyan-600 pl-4 mb-6">2.2 綁定狀態說明</h3>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-red-50 p-4 rounded-lg border border-red-100">
+               <h4 className="font-bold text-red-700 mb-2">需人工綁定</h4>
+               <p className="text-sm text-red-600 mb-3">資料有誤或不符。</p>
+               <div className="aspect-[9/16] bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500">
+                 [圖片: S__25157646_0.jpg]
+               </div>
+            </div>
+            <div className="bg-orange-50 p-4 rounded-lg border border-orange-100">
+               <h4 className="font-bold text-orange-700 mb-2">重複綁定</h4>
+               <p className="text-sm text-orange-600 mb-3">此資料已被使用。</p>
+               <div className="aspect-[9/16] bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500">
+                 [圖片: S__25157645_0.jpg]
+               </div>
+            </div>
+            <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+               <h4 className="font-bold text-gray-700 mb-2">未綁定</h4>
+               <p className="text-sm text-gray-600 mb-3">訪客選單模式。</p>
+               <div className="aspect-[9/16] bg-gray-200 rounded flex items-center justify-center text-xs text-gray-500">
+                 [圖片: S__25157649.jpg]
+               </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    )
+  }
+];
+
+const App = () => {
+  const [activeSection, setActiveSection] = useState('intro');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // 處理滾動到錨點
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50 font-sans text-gray-800 flex">
+      {/* Sidebar - Desktop */}
+      <aside className="hidden md:flex flex-col w-64 bg-white border-r border-gray-200 fixed h-full z-10">
+        <div className="p-6 border-b border-gray-100 flex items-center justify-center bg-[#0056b3]">
+           {/* Logo Area */}
+           <div className="text-white font-bold text-xl tracking-wider">Mr.P System</div>
+        </div>
+        <nav className="flex-1 overflow-y-auto p-4 space-y-2">
+          {manualData.map((section) => (
+            <div key={section.id}>
+              <button
+                onClick={() => {
+                   setActiveSection(section.id);
+                   if(!section.subItems) window.scrollTo({top:0, behavior:'smooth'});
+                }}
+                className={`w-full flex items-center p-3 rounded-lg transition-colors ${
+                  activeSection === section.id 
+                    ? 'bg-blue-50 text-[#0056b3] font-bold' 
+                    : 'text-gray-600 hover:bg-gray-50'
+                }`}
+              >
+                <span className="mr-3">{section.icon}</span>
+                {section.title}
+              </button>
+              
+              {/* Submenu */}
+              {section.subItems && activeSection === section.id && (
+                <div className="ml-9 mt-1 space-y-1 border-l-2 border-gray-100 pl-2">
+                  {section.subItems.map((sub) => (
+                    <button
+                      key={sub.id}
+                      onClick={() => scrollToSection(sub.id)}
+                      className="w-full text-left text-sm p-2 text-gray-500 hover:text-[#17a2b8] transition-colors"
+                    >
+                      {sub.title}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </nav>
+        <div className="p-4 border-t border-gray-100 text-xs text-gray-400 text-center">
+          © 2024 創盛國際資訊科技有限公司
+        </div>
+      </aside>
+
+      {/* Mobile Header */}
+      <div className="md:hidden fixed w-full bg-[#0056b3] text-white z-20 flex items-center justify-between p-4 shadow-md">
+        <span className="font-bold text-lg">Mr.P 藥局系統手冊</span>
+        <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 bg-white z-10 pt-20 px-6 overflow-y-auto md:hidden">
+           <nav className="space-y-4">
+            {manualData.map((section) => (
+              <div key={section.id} className="border-b border-gray-100 pb-4">
+                <div className="font-bold text-lg text-[#0056b3] mb-2 flex items-center">
+                  {section.icon} <span className="ml-2">{section.title}</span>
+                </div>
+                {section.subItems && (
+                  <div className="pl-6 space-y-3">
+                    {section.subItems.map(sub => (
+                       <button 
+                         key={sub.id}
+                         onClick={() => {
+                           setActiveSection(section.id);
+                           setIsMobileMenuOpen(false);
+                           setTimeout(() => scrollToSection(sub.id), 100);
+                         }}
+                         className="block text-gray-600"
+                       >
+                         {sub.title}
+                       </button>
+                    ))}
+                  </div>
+                )}
+                {!section.subItems && (
+                   <button 
+                     onClick={() => {
+                       setActiveSection(section.id);
+                       setIsMobileMenuOpen(false);
+                       window.scrollTo({top:0});
+                     }}
+                     className="block pl-6 text-gray-600"
+                   >
+                     查看內容
+                   </button>
+                )}
+              </div>
+            ))}
+           </nav>
+        </div>
+      )}
+
+      {/* Main Content */}
+      <main className="flex-1 md:ml-64 p-6 md:p-12 pt-24 md:pt-12 min-h-screen">
+        <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-sm p-8 min-h-[80vh]">
+          {manualData.map(section => (
+            activeSection === section.id && (
+              <div key={section.id} className="animate-fade-in">
+                <div className="flex items-center mb-8 border-b pb-4">
+                  <div className="p-3 bg-blue-100 text-[#0056b3] rounded-lg mr-4">
+                    {React.cloneElement(section.icon, { size: 32 })}
+                  </div>
+                  <h2 className="text-3xl font-bold text-gray-800">{section.title}</h2>
+                </div>
+                <div className="prose max-w-none text-gray-600">
+                  {section.content}
+                </div>
+              </div>
+            )
+          ))}
+        </div>
+      </main>
+    </div>
+  );
+};
+
+export default App;
